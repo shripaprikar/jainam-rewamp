@@ -1,4 +1,5 @@
 import { defineType, defineField, defineArrayMember } from "sanity";
+import { CKEditorInput } from '../components/CKEditorInput' 
 
 export const blog = defineType({
   type: "document",
@@ -35,12 +36,21 @@ export const blog = defineType({
         hotspot: true, // Recommended for better cropping control
       },
     }),
+    // defineField({
+    //   type: "array",
+    //   name: "content",
+    //   title: "Content",
+    //   validation: (e) => e.required(),
+    //   of: [defineArrayMember({ type: "block" })],
+    // }),
     defineField({
-      type: "array",
+      type: "text",
       name: "content",
       title: "Content",
       validation: (e) => e.required(),
-      of: [defineArrayMember({ type: "block" })],
+      components: {
+        input: CKEditorInput
+      },
     }),
     // Single Reference to Author
     defineField({
