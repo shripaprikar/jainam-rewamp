@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { client } from "~/sanity/client";
 import type { Route } from "./+types/home";
 import { PortableText } from "@portabletext/react";
+import AboutBlock from "~/components/custom/about-block";
 export const BLOG_QUERY = `*[
   _type == "blog"
   && defined(slug.current)
@@ -26,13 +27,14 @@ export const BLOG_QUERY = `*[
     "slug": slug.current
   }
 }`;
-export async function loader() {
+export async function clientLoader() {
   return { blogs: await client.fetch<SanityDocument[]>(BLOG_QUERY) };
 }
 export default function IndexPage({ loaderData }: Route.ComponentProps) {
   const { blogs } = loaderData;
   return (
     <main className="container mx-auto min-h-screen max-w-3xl p-8">
+      <AboutBlock />
       <h1 className="text-4xl font-bold mb-8">Blogs</h1>
       <ul className="flex flex-col gap-y-4">
         {blogs.map((blog) => (

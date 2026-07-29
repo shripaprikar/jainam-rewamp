@@ -16,7 +16,7 @@ export const BLOG_QUERY = `*[
   content
 }`;
 
-export async function loader() {
+export async function clientLoader() {
   return { blogs: await client.fetch<SanityDocument[]>(BLOG_QUERY) };
 }
 

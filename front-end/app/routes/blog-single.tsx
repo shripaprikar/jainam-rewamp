@@ -41,7 +41,7 @@ const BLOG_QUERY = `*[
   seoKeywords
 }`;
 
-export async function loader({ params }: Route.LoaderArgs) {
+export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   return { post: await client.fetch<SanityDocument>(BLOG_QUERY, params) };
 }
 
